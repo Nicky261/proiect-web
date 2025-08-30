@@ -15,9 +15,12 @@ from .schemas import (
 from .auth import get_password_hash, verify_password, create_access_token, get_current_user
 from .deps import is_admin
 
+from .routers import admin
+
+
 # === App init ===
 app = FastAPI(title="Hub Studenti API")
-app.include_router(admin_router)
+app.include_router(admin.router)
 
 # CORS (pentru frontend dev)
 app.add_middleware(

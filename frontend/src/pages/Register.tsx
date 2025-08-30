@@ -1,18 +1,21 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../api/client'
 
 export default function Register() {
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
       await api.post('/auth/register', { email, username, password })
-      alert('Registered! Now login.')
+      alert('Cont creat cu succes! Acum te poți loga.')
+      navigate('/login')
     } catch (err) {
-      alert('Register failed')
+      alert('Înregistrarea a eșuat')
     }
   }
 
@@ -21,24 +24,32 @@ export default function Register() {
       onSubmit={submit}
       style={{ display: 'grid', gap: 12, maxWidth: 360, margin: '64px auto' }}
     >
-      <h2>Register</h2>
+      <h2>Înregistrare</h2>
       <input
-        placeholder='email'
+        placeholder='Email'
+        type='email'
         value={email}
         onChange={e => setEmail(e.target.value)}
+        required
       />
       <input
-        placeholder='username'
+        placeholder='Username'
         value={username}
         onChange={e => setUsername(e.target.value)}
+        required
       />
       <input
-        placeholder='password'
+        placeholder='Parolă'
         type='password'
         value={password}
         onChange={e => setPassword(e.target.value)}
+        required
       />
-      <button type='submit'>Create account</button>
+      <button type='submit'>Creează cont</button>
+      
+      <div style={{ textAlign: 'center', marginTop: '16px' }}>
+        <Link to="/login">Ai deja cont? Loghează-te</Link>
+      </div>
     </form>
   )
 }

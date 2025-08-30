@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { api } from '../api/client'
 
 export default function Login({ onLogin }: { onLogin: () => void }) {
@@ -37,6 +38,10 @@ export default function Login({ onLogin }: { onLogin: () => void }) {
         onChange={e => setPassword(e.target.value)}
       />
       <button type='submit'>Sign in</button>
+      
+      <div style={{ textAlign: 'center', marginTop: '16px' }}>
+        <Link to="/register">Nu ai cont? Înregistrează-te</Link>
+      </div>
     </form>
   )
 }
